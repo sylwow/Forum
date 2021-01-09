@@ -1,0 +1,15 @@
+<form class="newPostForm">
+    <mat-form-field class="newPostField">
+      <mat-label>New Post</mat-label>
+      <textarea matInput #message [attr.maxlength]="maxMessageLen" placeholder="write something..."></textarea>
+      <mat-hint align="end">{{message.value.length}} / {{maxMessageLen}}</mat-hint>
+    </mat-form-field>
+</form>
+<div class="controls">
+    <button mat-button (click)="Cancel()">
+        <span>Cancel</span>
+    </button>
+    <button mat-button type="submit" (click)="Post(message.value)">
+        <span>Post</span>
+    </button>
+</div>

@@ -1,7 +1,10 @@
 <mat-toolbar calss="navbar">
     <span>Sylwow Forum</span>
     <span class="example-spacer"></span>
-    <div *ngIf="loggedIn; else signIn">Content to render when condition is true.
+    <button mat-button [routerLink]="'/blogwow'">
+        <span>Blogwow</span>
+    </button>
+    <div *ngIf="loggedIn; else signIn">
         <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
             <mat-icon>share</mat-icon>
         </button>
