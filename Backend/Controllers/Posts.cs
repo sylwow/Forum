@@ -23,10 +23,17 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody][Required] Post post)
+        public async Task<IActionResult> Post([FromBody][Required] NewPost post)
         {
             await _postResource.InsertNewPostAsync(post.UserId.Value, post.Message);
             return Ok();
+        }
+
+        [HttpGet("{offset}")]
+        public async Task<IActionResult> GetPosts([FromRoute][Required] int offset)
+        {
+            var posts = await _postResource.getPostsAsync(offset);
+            return Ok(posts);
         }
     }
 }

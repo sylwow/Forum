@@ -1,7 +1,10 @@
 ﻿using Backend.Classes.Dto;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -45,9 +48,47 @@ namespace Backend.Database
                     command.Parameters.Add(parameter);
                 }
 
-                SqlDataReader dr = await command.ExecuteReaderAsync(CommandBehavior.CloseConnection);
+                await command.ExecuteReaderAsync(CommandBehavior.CloseConnection);
                 return true;
             }
+        }
+
+        public async Task<IEnumerable<T>> QuerryList<T>(string procedure, SqlParameters parameters)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionStr))
+            {
+                SqlCommand command = new SqlCommand(procedure, connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Connection.Open();
+                foreach (var parameter in parameters)
+                {
+                    command.Parameters.Add(parameter);
+                }
+
+                SqlDataReader dr = await command.ExecuteReaderAsync(CommandBehavior.Default);
+                var list = Convert<T>(dr);
+                return list;
+            }
+        }
+
+        public static List<T> Convert<T>(IDataReader dr)
+        {
+            var list = new List<T>();
+            T obj = default(T);
+            while (dr.Read())
+            {
+                obj = Activator.CreateInstance<T>();
+                foreach (PropertyInfo prop in obj.GetType().GetProperties())
+                {
+                    if (!object.Equals(dr[prop.Name], DBNull.Value))
+                    {
+                        prop.SetValue(obj, dr[prop.Name], null);
+                    }
+                }
+                list.Add(obj);
+            }
+            return list;
         }
     }
 }

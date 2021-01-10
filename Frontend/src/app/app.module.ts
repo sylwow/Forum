@@ -16,6 +16,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { NewPostComponent } from './blogwow/new-post/new-post.component';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
+import { PostsComponent } from './blogwow/posts/posts.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     BlogwowComponent,
     MainComponent,
     PageNotFoundComponent,
-    NewPostComponent
+    NewPostComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,8 @@ import { HttpClientModule } from '@angular/common/http';
     LayoutModule,
     FlexLayoutModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

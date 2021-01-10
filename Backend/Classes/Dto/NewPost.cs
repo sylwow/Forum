@@ -1,12 +1,12 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Backend.Classes.Dto
 {
-    public class Post
+    public class NewPost
     {
+        [Required]
         public int? UserId { get; set; }
-        public DateTime CreateTime { get; set; }
+        [Required]
         public string Message { get; set; }
-        public int? Rate { get; set; }
     }
 }
