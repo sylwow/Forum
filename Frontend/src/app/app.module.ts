@@ -15,6 +15,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NewPostComponent } from './blogwow/new-post/new-post.component';
 import { MatInputModule } from '@angular/material/input';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     LayoutModule,
     FlexLayoutModule,
-    MatInputModule
+    MatInputModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

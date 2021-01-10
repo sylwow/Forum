@@ -1,6 +1,7 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, NgZone, ViewChild, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
+import { PostsService } from '../../services/posts.service';
 
 @Component({
   selector: 'app-new-post',
@@ -10,13 +11,15 @@ import { take } from 'rxjs/operators';
 export class NewPostComponent implements OnInit {
 
   maxMessageLen = 3000;
-  constructor(private _ngZone: NgZone) {}
+  constructor(private _ngZone: NgZone, private posts$: PostsService) {}
 
   ngOnInit(): void {
   }
 
   Post(message: string) {
-    console.log("post");
+    this.posts$.postMessage(12, message).subscribe({
+      error: e => console.log(e)
+    })
   }
 
   Cancel() {
