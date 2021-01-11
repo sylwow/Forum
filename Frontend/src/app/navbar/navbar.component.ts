@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { SignInDialogComponent } from './sign-in-dialog/sign-in-dialog.component';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +9,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   loggedIn = false;
-  constructor() { }
+  constructor(public dialog: MatDialog) {}
+
 
   ngOnInit(): void {
   }
 
+  showLogInDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {}
+    dialogConfig.minWidth = 400;
+    
+    const dialogRef = this.dialog.open(SignInDialogComponent, dialogConfig);
+
+    
+    dialogRef.afterClosed().subscribe(
+      data => this.analyzeData(data)
+  );
+  }
+
+  analyzeData(data: any) {
+    if(!data) {
+      console.log("not logged");
+    }
+  }
 }

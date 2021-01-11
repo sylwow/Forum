@@ -18,6 +18,10 @@ import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { PostsComponent } from './blogwow/posts/posts.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatMenuModule } from '@angular/material/menu';
+import { SignInDialogComponent } from './navbar/sign-in-dialog/sign-in-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -28,7 +32,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MainComponent,
     PageNotFoundComponent,
     NewPostComponent,
-    PostsComponent
+    PostsComponent,
+    SignInDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +46,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FlexLayoutModule,
     MatInputModule,
     HttpClientModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatMenuModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

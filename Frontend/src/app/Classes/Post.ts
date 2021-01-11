@@ -2,8 +2,10 @@
 
 export class Post
 {
-    public UserId: number;
-    public CreateTime: Date; 
-    public Message: string;
-    public Rate: number;
+    public userId: number;
+    public createTime: string; 
+    public message: string;
+    public rate: number;
+    public username: string;
+    public avatarFilePath: string;
 }

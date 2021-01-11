@@ -1,7 +1,7 @@
 import { HostListener } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Post } from 'src/app/Classes/Post';
-import { PostsService } from 'src/app/services/posts.service';
+import { ForumService } from 'src/app/services/posts.service';
 
 @Component({
   selector: 'app-posts',
@@ -14,7 +14,7 @@ export class PostsComponent implements OnInit {
   offset = 0;
   end = false;
   posts: Post[] = [];
-  constructor(private post$: PostsService) { }
+  constructor(private post$: ForumService) { }
   
   ngOnInit(): void {
     this.getMorePosts();
@@ -50,5 +50,13 @@ export class PostsComponent implements OnInit {
         } 
       }
     )
+  }
+
+  getHoursDiff(dateStr: string): number {
+    let date = new Date(dateStr);
+    let current = Date.now();
+    let diff = current - date.getTime();
+    let hoursDiff = diff / (3600 * 1000);
+    return Math.floor(hoursDiff);
   }
 }

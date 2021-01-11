@@ -9,5 +9,6 @@ namespace Backend.Resources
         Task<bool> InsertNewPostAsync(int UserId, string message);
         Task<IEnumerable<Post>> getPostsAsync(int offset);
 
+        Task<IEnumerable<User>> Login(string username, string password);
     }
 }

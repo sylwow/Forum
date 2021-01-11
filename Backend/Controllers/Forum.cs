@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Backend.Controllers
@@ -11,12 +12,12 @@ namespace Backend.Controllers
     [ApiController]
     [Route("[controller]")]
     [EnableCors]
-    public class Posts : ControllerBase
+    public class Forum : ControllerBase
     {
-        private readonly ILogger<Posts> _logger;
+        private readonly ILogger<Forum> _logger;
         private IPostResource _postResource;
 
-        public Posts(ILogger<Posts> logger, IPostResource postresource)
+        public Forum(ILogger<Forum> logger, IPostResource postresource)
         {
             _logger = logger;
             _postResource = postresource;
@@ -34,6 +35,13 @@ namespace Backend.Controllers
         {
             var posts = await _postResource.getPostsAsync(offset);
             return Ok(posts);
+        }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody][Required] LoginData data)
+        {
+            var user = await _postResource.Login(data.Username, data.Password);
+            return Ok(user.FirstOrDefault());
         }
     }
 }

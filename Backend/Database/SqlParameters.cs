@@ -16,6 +16,13 @@ namespace Backend.Database
             parameters.Add(val);
         }
 
+        public void Add(string name, SqlDbType type, object value, int size)
+        {
+            var val = new SqlParameter(name, type, size);
+            val.Value = value;
+            parameters.Add(val);
+        }
+
         public IEnumerator<SqlParameter> GetEnumerator()
         {
             return parameters.GetEnumerator();

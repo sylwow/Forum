@@ -31,5 +31,13 @@ namespace Backend.Resources
             return res;
         }
 
+        public async Task<IEnumerable<User>> Login(string username, string password)
+        {
+            var parameters = new SqlParameters();
+            parameters.Add("@Username", SqlDbType.VarChar, username, 256);
+            parameters.Add("@Password", SqlDbType.VarChar, password, 256);
+            var res = await _dbController.QuerryList<User>("dbo.LoginUser", parameters);
+            return res;
+        }
     }
 }
