@@ -26,7 +26,7 @@ namespace Backend.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody][Required] NewPost post)
         {
-            await _postResource.InsertNewPostAsync(post.UserId.Value, post.Message);
+            await _postResource.InsertNewPostAsync(post.UserId.Value, post.Message, post.Media);
             return Ok();
         }
 

@@ -8,5 +8,6 @@ namespace Backend.Classes.Dto
         public int? UserId { get; set; }
         [Required]
         public string Message { get; set; }
+        public string Media { get; set; }
     }
 }

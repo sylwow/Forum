@@ -6,7 +6,7 @@ namespace Backend.Resources
 {
     public interface IPostResource
     {
-        Task<bool> InsertNewPostAsync(int UserId, string message);
+        Task<bool> InsertNewPostAsync(int UserId, string message, string media);
         Task<IEnumerable<Post>> getPostsAsync(int offset);
 
         Task<IEnumerable<User>> Login(string username, string password);

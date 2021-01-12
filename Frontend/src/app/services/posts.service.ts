@@ -10,12 +10,14 @@ import { User } from '../Classes/User';
 })
 export class ForumService {
   private apiUrl = '/api/Forum';
+  private apiData = '/api/Data';
   constructor(private http: HttpClient) { }
 
-  postMessage(userId: number, message: string) {
+  postMessage(userId: number, message: string, media: string) {
     let body = {
       userId: userId,
-      message: message
+      message: message,
+      media: media
     };
     return this.http.post(this.apiUrl, body);
   }
@@ -30,5 +32,13 @@ export class ForumService {
       password: password
     };
     return this.http.post<User>(`${this.apiUrl}/Login`, body );
+  }
+
+  getApiUrl(): string {
+    return this.apiUrl
+  }
+
+  getApiDataUrl(): string {
+    return this.apiData;
   }
 }

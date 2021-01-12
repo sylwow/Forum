@@ -22,11 +22,12 @@ namespace Backend.Resources
             return res;
         }
 
-        public async Task<bool> InsertNewPostAsync(int UserId, string message)
+        public async Task<bool> InsertNewPostAsync(int UserId, string message, string media)
         {
             var parameters = new SqlParameters();
             parameters.Add("@UserId", SqlDbType.Int, UserId);
             parameters.Add("@Message", SqlDbType.Text, message);
+            parameters.Add("@Media", SqlDbType.Text, media);
             var res = await _dbController.Querry("dbo.insertNewPost", parameters);
             return res;
         }

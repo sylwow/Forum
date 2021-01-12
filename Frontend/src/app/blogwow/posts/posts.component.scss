@@ -9,11 +9,13 @@
     width: 90%;
     padding: 5%;
     color: white;
+    font-family: 'Lato', sans-serif;
 }
 .message {
     width: 100%;
     display: flex;
     flex-direction: row;
+    margin-top: 20px;
 }
 .spinnerContainer {
     width: 100%;
@@ -31,24 +33,38 @@
 }
 
 .avatarContainer {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     padding: 10px;
 }
 
 .content {
-
+    flex-grow: 1
 }
 
 .messageTitle {
     width: 100%;
+    display: flex;
 }
 .username {
     padding: 5px;
     font-weight: bold;
+    font-size: 17px;
     color: $color-orange-100;
 }
 
 .time {
-    color: $color-pink-200;
+    padding: 5px;
+    color: $color-pink-150;
+}
+
+.avatarImg {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: block; /* remove extra space below image */
+}
+
+.images {
+    width: 100%;
 }

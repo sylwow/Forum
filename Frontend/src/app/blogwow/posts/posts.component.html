@@ -1,16 +1,23 @@
 <div class="container">
     <div class="message" *ngFor="let post of posts">
-    <div class="avatarContainer">aaa</div>
-    <div class="content">
-        <div class="messageTitle">
-            <span class="username">{{post.username}}</span>
-            <span class="time">{{getHoursDiff(post.createTime)}} hours ago</span>
+        <div class="avatarContainer">
+            <img class="avatarImg" [src]="getavatarPath(post)">
         </div>
-        <span>
-            {{post.message}}
-        </span>
-    </div>
-    <div class="separator"></div>
+        <div class="content">
+            <div class="messageTitle">
+                <span class="username">{{post.username}}</span>
+                <span class="time">{{getHoursDiff(post.createTime)}} hours ago</span>
+            </div>
+            <span *ngFor="let row of post.message">
+                <p>
+                    {{row}}
+                </p>
+                <br>
+            </span>
+            <div *ngIf="post.media">
+                <img class="images" *ngFor="let url of post.media" [src]="url" alt="">
+            </div>
+        </div>
     </div>
     <div class="spinnerContainer">
         <div class="spinner" *ngIf="spinner">

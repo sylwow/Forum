@@ -10,5 +10,6 @@ namespace Backend.Classes.Dto
         public int? Rate { get; set; }
         public string Username { get; set; }
         public string AvatarFilePath { get; set; }
+        public string Media { get; set; }
     }
 }

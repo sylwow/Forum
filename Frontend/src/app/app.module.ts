@@ -22,6 +22,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { SignInDialogComponent } from './navbar/sign-in-dialog/sign-in-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MediaDialogComponent } from './blogwow/new-post/media-dialog/media-dialog.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     PageNotFoundComponent,
     NewPostComponent,
     PostsComponent,
-    SignInDialogComponent
+    SignInDialogComponent,
+    MediaDialogComponent
   ],
   imports: [
     BrowserModule,

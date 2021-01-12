@@ -42,6 +42,10 @@ export class PostsComponent implements OnInit {
           if (res.length == 0) {
             this.end = true;
           }
+          res.forEach( val => {
+            val.message = JSON.parse(val.message as unknown as string);
+            val.media = JSON.parse(val.media as unknown as string);
+          })
           this.posts = this.posts.concat(res);
         },
         error: error => {
@@ -58,5 +62,9 @@ export class PostsComponent implements OnInit {
     let diff = current - date.getTime();
     let hoursDiff = diff / (3600 * 1000);
     return Math.floor(hoursDiff);
+  }
+
+  getavatarPath(post: Post): string {
+    return `${this.post$.getApiDataUrl()}/${post.avatarFilePath}`;
   }
 }
