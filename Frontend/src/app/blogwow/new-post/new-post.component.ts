@@ -14,7 +14,7 @@ export class NewPostComponent implements OnInit {
 
   focused = false;
   maxMessageLen = 3000;
-  media: string[];
+  media: string[] = [];
   constructor(private _ngZone: NgZone, private posts$: ForumService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -58,9 +58,6 @@ export class NewPostComponent implements OnInit {
   }
 
   addUrl(url: string) {
-    if (!this.media) {
-      this.media = []
-    }
-    this.media.push(url)
+    this.media.push(url);
   }
 }

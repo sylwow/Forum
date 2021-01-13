@@ -9,7 +9,7 @@ import { ForumService } from 'src/app/services/posts.service';
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements OnInit {
-  
+  currentColor = 'white';
   spinner = false;
   offset = 0;
   end = false;
@@ -26,7 +26,6 @@ export class PostsComponent implements OnInit {
     let max = document.documentElement.scrollHeight;
     // pos/max will give you the distance between scroll bottom and and bottom of screen in percentage.
      if(pos == max && !this.end)   {
-     //Do your action here
        this.spinner = true;
        this.getMorePosts();
      }

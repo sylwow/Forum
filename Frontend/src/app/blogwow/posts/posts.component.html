@@ -7,6 +7,15 @@
             <div class="messageTitle">
                 <span class="username">{{post.username}}</span>
                 <span class="time">{{getHoursDiff(post.createTime)}} hours ago</span>
+                <span class="spacer"></span>
+                <span class="rate">{{post.rate}}</span>
+                <span>
+                    <button mat-icon-button class="example-icon favorite-icon" [matMenuTriggerFor]="menu" aria-label="Bump rate">
+                        <svg style="width:34px;height:24px" viewBox="0 0 34 24">
+                            <path [style.fill]="currentColor" d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" />
+                        </svg>
+                    </button>
+                </span>
             </div>
             <span *ngFor="let row of post.message">
                 <p>
