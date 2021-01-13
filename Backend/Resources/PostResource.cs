@@ -14,15 +14,40 @@ namespace Backend.Resources
             this._dbController = dbController;
         }
 
-        public async Task<IEnumerable<Post>> getPostsAsync(int offest)
+        public async Task<bool> BumpRate(int postId, int userId)
+        {
+            var parameters = new SqlParameters();
+            parameters.Add("@PostId", SqlDbType.Int, postId);
+            parameters.Add("@UserId", SqlDbType.Int, userId);
+            var res = await _dbController.Querry("dbo.BumpRate", parameters);
+            bool result = false;
+            if (res.HasValue)
+                result = res.Value == 1;
+            return result;
+        }
+
+        public async Task<bool> DeBumpRate(int postId, int userId)
+        {
+            var parameters = new SqlParameters();
+            parameters.Add("@PostId", SqlDbType.Int, postId);
+            parameters.Add("@UserId", SqlDbType.Int, userId);
+            var res = await _dbController.Querry("dbo.DeBumpRate", parameters);
+            bool result = false;
+            if (res.HasValue)
+                result = res.Value == 1;
+            return result;
+        }
+
+        public async Task<IEnumerable<Post>> getPostsAsync(int offest, int userId)
         {
             var parameters = new SqlParameters();
             parameters.Add("@Offset", SqlDbType.Int, offest);
+            parameters.Add("@UserId", SqlDbType.Int, userId);
             var res = await _dbController.QuerryList<Post>("dbo.getPosts", parameters);
             return res;
         }
 
-        public async Task<bool> InsertNewPostAsync(int UserId, string message, string media)
+        public async Task<int?> InsertNewPostAsync(int UserId, string message, string media)
         {
             var parameters = new SqlParameters();
             parameters.Add("@UserId", SqlDbType.Int, UserId);
@@ -39,6 +64,11 @@ namespace Backend.Resources
             parameters.Add("@Password", SqlDbType.VarChar, password, 256);
             var res = await _dbController.QuerryList<User>("dbo.LoginUser", parameters);
             return res;
+        }
+
+        Task<bool> IPostResource.InsertNewPostAsync(int UserId, string message, string media)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

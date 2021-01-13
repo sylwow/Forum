@@ -35,21 +35,23 @@ namespace Backend.Database
             _connectionStr = _builder.ConnectionString;
         }
 
-        public async Task<bool> Querry(string procedure, SqlParameters parameters)
+        public async Task<int?> Querry(string procedure, SqlParameters parameters)
         {
             using (SqlConnection connection = new SqlConnection(_connectionStr))
             {
                 SqlCommand command = new SqlCommand(procedure, connection);
                 command.CommandType = CommandType.StoredProcedure;
-
                 command.Connection.Open();
+                SqlParameter retval = new SqlParameter("@ReturnValue", System.Data.SqlDbType.Int);
+                retval.Direction = System.Data.ParameterDirection.ReturnValue;
+                command.Parameters.Add(retval);
                 foreach (var parameter in parameters)
                 {
                     command.Parameters.Add(parameter);
                 }
 
                 await command.ExecuteReaderAsync(CommandBehavior.CloseConnection);
-                return true;
+                return (int?)command.Parameters["@ReturnValue"].Value;
             }
         }
 

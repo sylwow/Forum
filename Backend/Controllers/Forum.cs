@@ -30,10 +30,24 @@ namespace Backend.Controllers
             return Ok();
         }
 
-        [HttpGet("{offset}")]
-        public async Task<IActionResult> GetPosts([FromRoute][Required] int offset)
+        [HttpGet("{offset}/{userId}")]
+        public async Task<IActionResult> GetPosts([FromRoute][Required] int offset, [FromRoute][Required] int userId)
         {
-            var posts = await _postResource.getPostsAsync(offset);
+            var posts = await _postResource.getPostsAsync(offset, userId);
+            return Ok(posts);
+        }
+
+        [HttpGet("BumpRate/{postId}/{userId}")]
+        public async Task<IActionResult> BumpRate([FromRoute][Required] int postId, [FromRoute][Required] int userId)
+        {
+            var posts = await _postResource.BumpRate(postId, userId);
+            return Ok(posts);
+        }
+
+        [HttpGet("DeBumpRate/{postId}/{userId}")]
+        public async Task<IActionResult> DeBumpRate([FromRoute][Required] int postId, [FromRoute][Required] int userId)
+        {
+            var posts = await _postResource.DeBumpRate(postId, userId);
             return Ok(posts);
         }
 

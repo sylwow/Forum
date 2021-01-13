@@ -4,6 +4,7 @@ namespace Backend.Classes.Dto
 {
     public class Post
     {
+        public int? Id { get; set; }
         public int? UserId { get; set; }
         public DateTime CreateTime { get; set; }
         public string Message { get; set; }
@@ -11,5 +12,6 @@ namespace Backend.Classes.Dto
         public string Username { get; set; }
         public string AvatarFilePath { get; set; }
         public string Media { get; set; }
+        public int BumpedByYou { get; set; }
     }
 }

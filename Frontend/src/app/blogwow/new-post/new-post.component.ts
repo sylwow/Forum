@@ -2,7 +2,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, NgZone, ViewChild, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
-import { ForumService } from '../../services/posts.service';
+import { ForumService } from '../../services/forum.service';
 import { MediaDialogComponent } from './media-dialog/media-dialog.component';
 
 @Component({

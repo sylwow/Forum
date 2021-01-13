@@ -1,7 +1,7 @@
 import { HostListener } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Post } from 'src/app/Classes/Post';
-import { ForumService } from 'src/app/services/posts.service';
+import { ForumService } from 'src/app/services/forum.service';
 
 @Component({
   selector: 'app-posts',
@@ -10,6 +10,7 @@ import { ForumService } from 'src/app/services/posts.service';
 })
 export class PostsComponent implements OnInit {
   currentColor = 'white';
+  bumped = false;
   spinner = false;
   offset = 0;
   end = false;
@@ -33,7 +34,7 @@ export class PostsComponent implements OnInit {
 
   getMorePosts(){
     this.spinner = true;
-    this.post$.getPosts(this.offset).subscribe(
+    this.post$.getPosts(this.offset, 1).subscribe(
       {
         next: res => {
           this.spinner = false;
@@ -65,5 +66,23 @@ export class PostsComponent implements OnInit {
 
   getavatarPath(post: Post): string {
     return `${this.post$.getApiDataUrl()}/${post.avatarFilePath}`;
+  }
+
+  bump(post: Post) {
+    if(!post.bumpedByYou) {
+      this.post$.bumpRate(post.id, 1).subscribe( res => {
+        if(res) {
+          post.rate++;
+          post.bumpedByYou = true;
+        }
+      })
+    } else {
+      this.post$.deBumpRate(post.id, 1).subscribe( res => {
+        if(res) {
+          post.rate--;
+          post.bumpedByYou = false;
+        }
+      })
+    }
   }
 }

@@ -22,8 +22,8 @@ export class ForumService {
     return this.http.post(this.apiUrl, body);
   }
   
-  getPosts(offset: number): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.apiUrl}/${offset}`);
+  getPosts(offset: number, userId: number): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this.apiUrl}/${offset}/${userId}`);
   }
 
   tryLogin(username: string, password: string){
@@ -40,5 +40,13 @@ export class ForumService {
 
   getApiDataUrl(): string {
     return this.apiData;
+  }
+
+  bumpRate(postId: number, userId: number) {
+    return this.http.get<User>(`${this.apiUrl}/BumpRate/${postId}/${userId}`);
+  }
+
+  deBumpRate(postId: number, userId: number) {
+    return this.http.get<User>(`${this.apiUrl}/DeBumpRate/${postId}/${userId}`);
   }
 }

@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ForumService } from 'src/app/services/posts.service';
+import { ForumService } from 'src/app/services/forum.service';
 import { UserService } from 'src/app/services/user.service';
 
 
