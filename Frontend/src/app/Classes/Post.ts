@@ -11,4 +11,7 @@ export class Post
     public avatarFilePath: string;
     public media: string[];
     public bumpedByYou: boolean;
+    public comments: number;
+    public commentList: Post[];
+    public tryComment: boolean;
 }

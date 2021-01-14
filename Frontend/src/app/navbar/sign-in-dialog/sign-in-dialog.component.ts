@@ -29,8 +29,8 @@ export class SignInDialogComponent implements OnInit {
     
   }
 
-  finish() {
-    this.dialogRef.close(this.loginData);
+  finish(result: boolean) {
+    this.dialogRef.close(result);
   }
 
   signIn(username: string, password: string) {
@@ -38,7 +38,7 @@ export class SignInDialogComponent implements OnInit {
       {
         next: res => {
           this.user$.user = res;
-          this.finish();
+          this.finish(true);
         },
         error: error => {
           console.log(error);

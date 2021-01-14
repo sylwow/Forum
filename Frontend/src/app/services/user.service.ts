@@ -6,7 +6,7 @@ import { User } from '../Classes/User';
 })
 export class UserService {
 
-  user: User;
+  user: User = null;
   constructor() { }
 
 }

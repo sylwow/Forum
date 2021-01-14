@@ -2,6 +2,7 @@ import { HostListener } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Post } from 'src/app/Classes/Post';
 import { ForumService } from 'src/app/services/forum.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-posts',
@@ -15,7 +16,9 @@ export class PostsComponent implements OnInit {
   offset = 0;
   end = false;
   posts: Post[] = [];
-  constructor(private post$: ForumService) { }
+  constructor(
+    private post$: ForumService,
+    private user$: UserService) { }
   
   ngOnInit(): void {
     this.getMorePosts();
@@ -34,7 +37,8 @@ export class PostsComponent implements OnInit {
 
   getMorePosts(){
     this.spinner = true;
-    this.post$.getPosts(this.offset, 1).subscribe(
+    let userId = this.user$.user?.userId ?? -1; 
+    this.post$.getPosts(this.offset, userId).subscribe(
       {
         next: res => {
           this.spinner = false;
@@ -70,7 +74,7 @@ export class PostsComponent implements OnInit {
 
   bump(post: Post) {
     if(!post.bumpedByYou) {
-      this.post$.bumpRate(post.id, 1).subscribe( res => {
+      this.post$.bumpRate(post.id, this.user$.user.userId).subscribe( res => {
         if(res) {
           post.rate++;
           post.bumpedByYou = true;
@@ -84,5 +88,26 @@ export class PostsComponent implements OnInit {
         }
       })
     }
+  }
+
+  getComments(post: Post) {
+    if(post.commentList) {
+      post.commentList = null;
+      return;
+    }
+    this.post$.getComments(post.id, 1).subscribe( {
+      next: res => {
+        if (res && res.length > 0) {
+          res.forEach( val => {
+            val.message = JSON.parse(val.message as unknown as string);
+            val.media = JSON.parse(val.media as unknown as string);
+          })
+          post.commentList = res;
+        }
+      },
+      error: error => {
+        console.log(error);
+      } 
+    });
   }
 }

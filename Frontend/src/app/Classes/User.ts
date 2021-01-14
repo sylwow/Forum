@@ -2,8 +2,8 @@
 
 export class User
 {
-    public UserId: number;
-    public UserName: string; 
-    public Email: string;
-    public AvatarPath: string;
+    public userId: number;
+    public userName: string; 
+    public email: string;
+    public avatarFilePath: string;
 }

@@ -1,7 +1,9 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { Component, NgZone, ViewChild, OnInit } from '@angular/core';
+import { Component, NgZone, ViewChild, OnInit, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
+import { Post } from 'src/app/Classes/Post';
+import { UserService } from 'src/app/services/user.service';
 import { ForumService } from '../../services/forum.service';
 import { MediaDialogComponent } from './media-dialog/media-dialog.component';
 
@@ -15,7 +17,13 @@ export class NewPostComponent implements OnInit {
   focused = false;
   maxMessageLen = 3000;
   media: string[] = [];
-  constructor(private _ngZone: NgZone, private posts$: ForumService, private dialog: MatDialog) {}
+  loggedIn = this.user$.user;
+  @Input("ParentPost") parentPost: Post;
+  constructor(
+    private _ngZone: NgZone, 
+    private posts$: ForumService, 
+    private dialog: MatDialog, 
+    private user$: UserService) {}
 
   ngOnInit(): void {
   }
@@ -24,13 +32,17 @@ export class NewPostComponent implements OnInit {
     let ff = message.split(/\r\n|\r|\n/);
     let mesgSplitted = JSON.stringify(ff);
     let mediaJson = JSON.stringify(this.media);
-    this.posts$.postMessage(1, mesgSplitted, mediaJson).subscribe({
-      error: e => console.log(e)
-    })
+    if(this.user$.user) {
+      this.posts$.postMessage(this.user$.user.userId, mesgSplitted, mediaJson, this.parentPost?.id).subscribe({
+        error: e => console.log(e)
+      })
+    }
   }
 
   Cancel() {
-    console.log("cancel");
+    if( this.parentPost) {
+      this.parentPost.tryComment = false;
+    }
   }
 
   onFocus() {

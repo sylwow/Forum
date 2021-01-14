@@ -12,7 +12,7 @@
 </mat-dialog-content>
 <mat-dialog-actions>
     <div class="actions">
-        <button mat-button (click)="finish()">Cancel</button>
+        <button mat-button (click)="finish(false)">Cancel</button>
         <span class="example-spacer"></span>
         <button mat-button class="end" (click)="createAccount()">Create Account</button>
         <button mat-button class="end" (click)="signIn(username.value, password.value)">Sign In</button>

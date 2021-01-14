@@ -13,11 +13,12 @@ export class ForumService {
   private apiData = '/api/Data';
   constructor(private http: HttpClient) { }
 
-  postMessage(userId: number, message: string, media: string) {
+  postMessage(userId: number, message: string, media: string, parentPost: number) {
     let body = {
       userId: userId,
       message: message,
-      media: media
+      media: media,
+      parentPostId: parentPost
     };
     return this.http.post(this.apiUrl, body);
   }
@@ -48,5 +49,9 @@ export class ForumService {
 
   deBumpRate(postId: number, userId: number) {
     return this.http.get<User>(`${this.apiUrl}/DeBumpRate/${postId}/${userId}`);
+  }
+
+  getComments(postId: number, userId: number) {
+    return this.http.get<Post[]>(`${this.apiUrl}/Comments/${postId}/${userId}`);
   }
 }

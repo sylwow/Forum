@@ -26,14 +26,21 @@ namespace Backend.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody][Required] NewPost post)
         {
-            await _postResource.InsertNewPostAsync(post.UserId.Value, post.Message, post.Media);
+            await _postResource.InsertNewPostAsync(post.UserId.Value, post.Message, post.Media, post.ParentPostId);
             return Ok();
         }
 
         [HttpGet("{offset}/{userId}")]
-        public async Task<IActionResult> GetPosts([FromRoute][Required] int offset, [FromRoute][Required] int userId)
+        public async Task<IActionResult> GetPosts([FromRoute][Required] int offset, [FromRoute][Required] int? userId)
         {
             var posts = await _postResource.getPostsAsync(offset, userId);
+            return Ok(posts);
+        }
+
+        [HttpGet("Comments/{postId}/{userId}")]
+        public async Task<IActionResult> GetComments([FromRoute][Required] int postId, [FromRoute][Required] int userId)
+        {
+            var posts = await _postResource.getComments(postId, userId);
             return Ok(posts);
         }
 

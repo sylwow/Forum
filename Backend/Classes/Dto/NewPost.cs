@@ -9,5 +9,6 @@ namespace Backend.Classes.Dto
         [Required]
         public string Message { get; set; }
         public string Media { get; set; }
+        public int? ParentPostId { get; set; }
     }
 }

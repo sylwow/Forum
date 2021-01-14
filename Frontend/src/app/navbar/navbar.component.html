@@ -5,8 +5,10 @@
         <span>Blogwow</span>
     </button>
     <div *ngIf="loggedIn; else signIn">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-            <mat-icon>share</mat-icon>
+        <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu" aria-label="Example icon-button with share icon">
+            <div class="avatarContainer">
+                <img class="avatarImg" [src]="getavatarPath()">
+            </div>
         </button>
     </div>
     <ng-template #signIn>
@@ -20,13 +22,5 @@
         <button mat-menu-item (click)="showLogInDialog()">
             <span>sign In</span>
         </button>
-        <button mat-menu-item disabled>
-            <mat-icon>voicemail</mat-icon>
-            <span>Check voice mail</span>
-        </button>
-        <button mat-menu-item>
-            <mat-icon>notifications_off</mat-icon>
-            <span>Disable alerts</span>
-        </button>
-        </mat-menu>
+    </mat-menu>
   </mat-toolbar>

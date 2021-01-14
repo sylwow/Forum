@@ -13,5 +13,6 @@ namespace Backend.Classes.Dto
         public string AvatarFilePath { get; set; }
         public string Media { get; set; }
         public int BumpedByYou { get; set; }
+        public int Comments { get; set; }
     }
 }

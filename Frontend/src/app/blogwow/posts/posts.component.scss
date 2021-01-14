@@ -11,7 +11,7 @@
     font-family: 'Lato', sans-serif;
 }
 .message {
-    padding: 5px;
+    padding: 10px;
     display: flex;
     flex-direction: row;
     margin-top: 10px;
@@ -36,7 +36,7 @@
 .avatarContainer {
     width: 60px;
     height: 60px;
-    padding: 10px;
+    padding-right: 5px;
 }
 
 .content {
@@ -76,4 +76,46 @@
 .rate {
     padding: 5px;
     font-size: 20px;
+}
+.commentButton {
+    display: flex;
+    justify-content: center;
+}
+
+.controls {
+    width: 100%;
+}
+.comment {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    background-color: $color-light-150;
+    border-radius: 5px;
+    .avatarContainer {
+        padding: 5px;
+        width: 50px;
+        height: 50px;
+        padding-right: 5px;
+        .avatarImg {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: block; /* remove extra space below image */
+        }
+    }
+}
+.newPostForm {
+    padding: 10px;
+}
+.newPostField{
+    width: 100%;
+}
+.controlsPost {
+    color: white;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+.commentInput {
+    margin-top: 5px;
 }
